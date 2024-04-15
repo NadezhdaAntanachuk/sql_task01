@@ -14,9 +14,7 @@ import ru.netology.banklogin.data.SQLHelper;
 import ru.netology.banklogin.data.DataHelper;
 
 public class BankLoginTest {
-
     LoginPage loginPage;
-
     @AfterEach
     void tearDown() {
         cleanAuthCodes();
@@ -25,12 +23,10 @@ public class BankLoginTest {
     static void tearDownAll() {
         cleanDatabase();
     }
-
     @BeforeEach
     void setUp() {
         loginPage = open("http://localhost:9999", LoginPage.class);
     }
-
     @Test
     @DisplayName("Should successfully login to dashboard with exist login and password from sut test data")
     void shouldSuccessfulLogin() {
@@ -55,6 +51,7 @@ public class BankLoginTest {
         verificationPage.verifyVerificationPageVisibility();
         var verificationCode = DataHelper.generateRandomVerificationCode();
         verificationPage.verify(verificationCode.getCode());
+        // verificationPage.verifyErrorNotification("Ошибка! \nНеверно указан код! Попробуйте ещё раз.");
         verificationPage.verifyErrorNotification("Ошибка! \nНеверно указан код! Попробуйте ещё раз.");
     }
 }
